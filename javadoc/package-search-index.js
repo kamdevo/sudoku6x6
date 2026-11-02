@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html","k":"18"},{"m":"com.example.sudoku6x6","l":"com.example.sudoku6x6"}];updateSearchResults();

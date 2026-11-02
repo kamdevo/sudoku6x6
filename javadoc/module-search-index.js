@@ -1,0 +1,1 @@
+moduleSearchIndex = [{"l":"com.example.sudoku6x6"}];updateSearchResults();
