@@ -1,0 +1,115 @@
+/*
+ * Shared styles for the menu and the game screens.
+ * Palette taken from the background image: dark brown, amber and cream.
+ */
+
+/* ---------- Root (both screens) ---------- */
+.root-pane {
+    -fx-background-color: #1a0f06;
+    -fx-font-family: "Segoe UI", "Arial";
+}
+
+/* Dark semi-transparent box so text is readable over the image */
+.card {
+    -fx-background-color: rgba(30, 18, 8, 0.85);
+    -fx-background-radius: 16;
+    -fx-border-color: #e0a526;
+    -fx-border-width: 2;
+    -fx-border-radius: 16;
+    -fx-padding: 24;
+}
+
+.title {
+    -fx-text-fill: #f5c542;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+}
+
+.subtitle {
+    -fx-text-fill: #f5e6c4;
+    -fx-font-size: 15px;
+}
+
+.message {
+    -fx-text-fill: #f5e6c4;
+    -fx-font-size: 15px;
+}
+
+/* ---------- Buttons ---------- */
+.button {
+    -fx-background-color: #4a2f17;
+    -fx-text-fill: #f5e6c4;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-border-color: #e0a526;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 8;
+    -fx-padding: 8 22;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #6b4423;
+}
+
+.primary-button {
+    -fx-background-color: #e0a526;
+    -fx-text-fill: #2b1a0e;
+}
+
+.primary-button:hover {
+    -fx-background-color: #f5c542;
+}
+
+/* ---------- Sudoku board ---------- */
+.board {
+    -fx-background-color: #1a0f06;
+    -fx-background-radius: 8;
+    -fx-padding: 6;
+    -fx-hgap: 2;
+    -fx-vgap: 2;
+}
+
+.sudoku-cell {
+    -fx-min-width: 56;
+    -fx-min-height: 56;
+    -fx-pref-width: 56;
+    -fx-pref-height: 56;
+    -fx-background-color: #f5e6c4;
+    -fx-text-fill: #7a4a12;
+    -fx-font-size: 24px;
+    -fx-alignment: center;
+    -fx-border-color: transparent;
+    -fx-border-width: 3;
+    -fx-cursor: hand;
+}
+
+.sudoku-cell:hover {
+    -fx-background-color: #fff3d6;
+}
+
+/* Starting numbers: the player cannot change them */
+.sudoku-cell.fixed {
+    -fx-background-color: #d9b878;
+    -fx-text-fill: #1a0f06;
+    -fx-font-weight: bold;
+    -fx-cursor: default;
+}
+
+/* Cell clicked by the player */
+.sudoku-cell.selected {
+    -fx-background-color: #ffe08a;
+}
+
+/* Number that breaks the Sudoku rules (red border) */
+.sudoku-cell.error {
+    -fx-border-color: #d32f2f;
+    -fx-text-fill: #d32f2f;
+}
+
+/* Number suggested by the Help button */
+.sudoku-cell.hint {
+    -fx-border-color: #2e7d32;
+    -fx-text-fill: #2e7d32;
+}
