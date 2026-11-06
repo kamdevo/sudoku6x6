@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Window that contains the main menu.
  * <p>
- * It loads {@code game-view.fxml}. Only one instance of this window
+ * It loads {@code menu-view.fxml}. Only one instance of this window
  * is ever created (Singleton pattern).
  *
  * @author Juan Camilo Morales
@@ -27,13 +27,13 @@ public class MenuView extends Stage {
      */
     public MenuView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource("/com/example/minigame/game-view.fxml")
+                getClass().getResource("/com/example/sudoku6x6/menu-view.fxml")
         );
         Parent root = fxmlLoader.load();
 
         Scene scene = new Scene(root);
 
-        setTitle("Minijuego Escritura rapida  - Bienvenido");
+        setTitle("Sudoku 6x6 - Welcome");
         setScene(scene);
         setResizable(false);
     }

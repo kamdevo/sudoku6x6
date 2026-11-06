@@ -1,6 +1,6 @@
 package com.example.sudoku6x6.views;
 
-
+import com.example.sudoku6x6.controllers.GameController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,13 +18,12 @@ import java.io.IOException;
  * @author Juan Camilo Morales
  * @author Nicolas Palacios
  * @author Juan Camilo Pinzon
- * @author Juan Camilo Pinzon
  * @version 1.0
  */
 public class GameView extends Stage {
 
     /** Controller created by the FXML loader for this view. */
-//    private  GameController controller;
+    private final GameController controller;
 
     /**
      * Creates the game window by loading its FXML file.
@@ -33,25 +32,26 @@ public class GameView extends Stage {
      */
     public GameView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource("/com/example/minigame/game-view.fxml")
+                getClass().getResource("/com/example/sudoku6x6/game-view.fxml")
         );
         Parent root = fxmlLoader.load();
-//        controller = fxmlLoader.getController();
+        controller = fxmlLoader.getController();
 
         Scene scene = new Scene(root);
 
-        setTitle("Escritura Rapida - Juego");
+        setTitle("Sudoku 6x6 - Game");
         setScene(scene);
         setResizable(false);
     }
-
 
     /**
      * Returns the controller of this view, so other controllers can pass data to it.
      *
      * @return the game controller
      */
-//    public GameController getController() {return controller;}
+    public GameController getController() {
+        return controller;
+    }
 
     /**
      * Returns the single instance of the game window,

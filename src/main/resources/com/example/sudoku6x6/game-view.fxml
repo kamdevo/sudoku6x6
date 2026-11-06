@@ -1,14 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
+<!-- StackPane: puts the background image behind and the game content on top of it -->
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.sudoku6x6.controllers.GameController"
+           styleClass="root-pane" stylesheets="@styles.css"
+           prefWidth="1155.0" prefHeight="650.0">
 
-</AnchorPane>
+    <!-- ImageView: background image. It has the same proportions as the window -->
+    <ImageView fitHeight="650.0" fitWidth="1155.0" opacity="0.91" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@images/background.png"/>
+        </image>
+    </ImageView>
+
+    <!-- BorderPane: title on top, board in the center, messages and buttons at the bottom -->
+    <BorderPane>
+        <top>
+            <VBox alignment="CENTER" spacing="4.0">
+                <BorderPane.margin>
+                    <Insets top="20.0" left="20.0" right="20.0"/>
+                </BorderPane.margin>
+                <VBox styleClass="card" alignment="CENTER" spacing="4.0" maxWidth="560.0">
+                    <Label text="SUDOKU 6x6" styleClass="title"/>
+                    <Label text="Click a cell and type a number from 1 to 6. Delete or Backspace clears it."
+                           styleClass="subtitle"/>
+                </VBox>
+            </VBox>
+        </top>
+
+        <center>
+            <!-- StackPane keeps the board centered -->
+            <StackPane>
+                <!--
+                    GridPane: the 6x6 board. Each Label is one cell.
+                    Blocks are 2 rows x 3 columns, so a new block starts at rows 2, 4 and column 3.
+                    Those cells have a margin that lets the dark board show through as a separator.
+                -->
+                <GridPane fx:id="boardGrid" styleClass="board" maxHeight="-Infinity" maxWidth="-Infinity">
+                    <!-- Row 0 -->
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="0" GridPane.columnIndex="3">
+                        <GridPane.margin><Insets left="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="0" GridPane.columnIndex="5"/>
+
+                    <!-- Row 1 -->
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="1" GridPane.columnIndex="3">
+                        <GridPane.margin><Insets left="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="1" GridPane.columnIndex="4"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="1" GridPane.columnIndex="5"/>
+
+                    <!-- Row 2 (new block) -->
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                        <GridPane.margin><Insets top="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                        <GridPane.margin><Insets top="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="2" GridPane.columnIndex="2">
+                        <GridPane.margin><Insets top="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="2" GridPane.columnIndex="3">
+                        <GridPane.margin><Insets top="4.0" left="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="2" GridPane.columnIndex="4">
+                        <GridPane.margin><Insets top="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="2" GridPane.columnIndex="5">
+                        <GridPane.margin><Insets top="4.0"/></GridPane.margin>
+                    </Label>
+
+                    <!-- Row 3 -->
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="3" GridPane.columnIndex="3">
+                        <GridPane.margin><Insets left="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="3" GridPane.columnIndex="4"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="3" GridPane.columnIndex="5"/>
+
+                    <!-- Row 4 (new block) -->
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="4" GridPane.columnIndex="0">
+                        <GridPane.margin><Insets top="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                        <GridPane.margin><Insets top="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="4" GridPane.columnIndex="2">
+                        <GridPane.margin><Insets top="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="4" GridPane.columnIndex="3">
+                        <GridPane.margin><Insets top="4.0" left="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="4" GridPane.columnIndex="4">
+                        <GridPane.margin><Insets top="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="4" GridPane.columnIndex="5">
+                        <GridPane.margin><Insets top="4.0"/></GridPane.margin>
+                    </Label>
+
+                    <!-- Row 5 -->
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="5" GridPane.columnIndex="3">
+                        <GridPane.margin><Insets left="4.0"/></GridPane.margin>
+                    </Label>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="5" GridPane.columnIndex="4"/>
+                    <Label styleClass="sudoku-cell" onMouseClicked="#onCellClicked" onKeyPressed="#onCellKeyPressed" GridPane.rowIndex="5" GridPane.columnIndex="5"/>
+                </GridPane>
+            </StackPane>
+        </center>
+
+        <bottom>
+            <VBox alignment="CENTER" spacing="12.0">
+                <BorderPane.margin>
+                    <Insets bottom="20.0" left="20.0" right="20.0"/>
+                </BorderPane.margin>
+                <VBox styleClass="card" alignment="CENTER" spacing="12.0" maxWidth="560.0">
+                    <Label fx:id="messageLabel" text="Press New Game to start." styleClass="message"/>
+
+                    <!-- HBox: buttons side by side -->
+                    <HBox alignment="CENTER" spacing="16.0">
+                        <Button text="New Game" onAction="#onNewGameClick" styleClass="primary-button"/>
+                        <Button text="Help" onAction="#onHelpClick"/>
+                        <Button text="Menu" onAction="#onMenuClick"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </bottom>
+    </BorderPane>
+</StackPane>
