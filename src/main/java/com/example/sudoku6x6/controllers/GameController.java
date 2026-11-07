@@ -28,8 +28,7 @@ import java.io.IOException;
  * </ul>
  * The look of a cell is changed by adding or removing the CSS style classes
  * {@code fixed}, {@code selected}, {@code error} and {@code hint} from {@code styles.css}.
- * The Sudoku rules (validation, new board generation and help) will be
- * added when the model is ready.
+
  *
  * @author Juan Camilo Morales
  * @author Nicolas Palacios
@@ -41,6 +40,9 @@ public class GameController {
     /** Number of rows and columns of the board. */
     private static final int BOARD_SIZE = 6;
 
+    /** How many hints the player can use in each game. */
+    private static final int MAX_HINTS = 3;
+
    
 
     /** The board with the numbers of the game (the model). */
@@ -48,6 +50,9 @@ public class GameController {
 
     /** Checks the Sudoku rules on the board. */
     private BoardValidator validator = new SudokuValidator(board);
+
+    /** How many hints the player can still use in this game. */
+    private int hintsLeft = MAX_HINTS;
 
     /** The 6x6 grid declared in the FXML. */
     @FXML
@@ -208,6 +213,7 @@ public class GameController {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.OK) {
+            hintsLeft = MAX_HINTS;
             board.fillWithStartingNumbers();
             loadBoard(board.getNumbers());
             messageLabel.setText("New game started. Good luck!");
@@ -215,15 +221,34 @@ public class GameController {
     }
 
     /**
-     * Shows a suggestion for an empty cell.
-     * TODO: ask the model for a valid number and show it with
-     * {@code cells[row][column].getStyleClass().add("hint")}.
+     * Writes a valid number in the selected empty cell and marks it with a green border.
+     * The hints are limited, so the board cannot be finished by using only this button.
      */
     @FXML
     private void onHelpClick() {
-        messageLabel.setText("Help is not available yet.");
-    }
+        if (hintsLeft == 0) {
+            messageLabel.setText("You have no hints left.");
+            return;
+        }
 
+        if (selectedCell == null || !board.isEmpty(getRow(selectedCell), getColumn(selectedCell))) {
+            messageLabel.setText("Click an empty cell first, then press Help.");
+            return;
+        }
+
+        int number = validator.findValidNumber(getRow(selectedCell), getColumn(selectedCell));
+
+        if (number == 0) {
+            messageLabel.setText("No number fits in this cell. Check your numbers.");
+            return;
+        }
+
+        editCell(selectedCell, number);
+        selectedCell.getStyleClass().add("hint");
+        selectedCell.requestFocus();
+        hintsLeft--;
+        messageLabel.setText("Hint: " + number + ". Hints left: " + hintsLeft + ".");
+    }
     /**
      * Goes back to the main menu.
      *
