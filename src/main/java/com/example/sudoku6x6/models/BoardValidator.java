@@ -26,4 +26,14 @@ public interface BoardValidator {
      * @return {@code true} if no number is repeated in any row, column or 2x3 block
      */
     boolean isValidBoard();
+
+
+    /**
+     * Looks for a number that can be placed in a cell without breaking the rules.
+     *
+     * @param row    row of the cell (0 to 5)
+     * @param column column of the cell (0 to 5)
+     * @return a valid number from 1 to 6, or 0 if there is none
+     */
+    int findValidNumber(int row, int column);
 }
