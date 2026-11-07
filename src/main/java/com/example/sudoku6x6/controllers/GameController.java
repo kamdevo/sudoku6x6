@@ -136,16 +136,35 @@ public class GameController {
 
         board.setNumber(row, column, value);
         showNumber(cell, value);
-        cell.getStyleClass().removeAll("error", "hint");
+        cell.getStyleClass().removeAll("hint");
 
-        if (value == 0) {
+        markErrors();
+
+        if (!validator.isValidBoard()) {
+            messageLabel.setText("There are repeated numbers in a row, column or 2x3 block.");
+        } else if (value == 0) {
             messageLabel.setText("Cell cleared.");
-        } else if (validator.isValidMove(row, column, value)) {
+        } else {
             messageLabel.setText("You wrote " + value + " in row " + (row + 1)
                     + ", column " + (column + 1) + ".");
-        } else {
-            cell.getStyleClass().add("error");
-            messageLabel.setText("That number is repeated in its row, column or 2x3 block.");
+        }
+    }
+
+    /**
+     * Checks every cell of the board and puts a red border on the repeated numbers.
+     */
+    private void markErrors() {
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int column = 0; column < BOARD_SIZE; column++) {
+                Label cell = cells[row][column];
+                int number = board.getNumber(row, column);
+
+                cell.getStyleClass().remove("error");
+
+                if (number != 0 && !validator.isValidMove(row, column, number)) {
+                    cell.getStyleClass().add("error");
+                }
+            }
         }
     }
 
@@ -221,7 +240,8 @@ public class GameController {
     }
 
     /**
-     * Writes a valid number in the selected empty cell and marks it with a green border.
+     * Looks for the first empty cell where a number fits, marks it with a green border
+     * and tells the player the number. The number is not written: the player decides.
      * The hints are limited, so the board cannot be finished by using only this button.
      */
     @FXML
@@ -231,24 +251,24 @@ public class GameController {
             return;
         }
 
-        if (selectedCell == null || !board.isEmpty(getRow(selectedCell), getColumn(selectedCell))) {
-            messageLabel.setText("Click an empty cell first, then press Help.");
-            return;
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int column = 0; column < BOARD_SIZE; column++) {
+                if (board.isEmpty(row, column)) {
+                    int number = validator.findValidNumber(row, column);
+                    if (number != 0) {
+                        cells[row][column].getStyleClass().add("hint");
+                        hintsLeft--;
+                        messageLabel.setText("Hint: you can put " + number + " in row " + (row + 1)
+                                + ", column " + (column + 1) + ". Hints left: " + hintsLeft + ".");
+                        return;
+                    }
+                }
+            }
         }
 
-        int number = validator.findValidNumber(getRow(selectedCell), getColumn(selectedCell));
-
-        if (number == 0) {
-            messageLabel.setText("No number fits in this cell. Check your numbers.");
-            return;
-        }
-
-        editCell(selectedCell, number);
-        selectedCell.getStyleClass().add("hint");
-        selectedCell.requestFocus();
-        hintsLeft--;
-        messageLabel.setText("Hint: " + number + ". Hints left: " + hintsLeft + ".");
+        messageLabel.setText("No hint available. Check your numbers.");
     }
+
     /**
      * Goes back to the main menu.
      *
