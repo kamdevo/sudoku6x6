@@ -142,7 +142,7 @@
 
                     <!-- HBox: buttons side by side -->
                     <HBox alignment="CENTER" spacing="16.0">
-                        <Button text="New Game" onAction="#onNewGameClick"/>
+                        <Button text="New Game" onAction="#onNewGameClick" styleClass="primary-button"/>
                         <Button text="Help" onAction="#onHelpClick"/>
                         <Button text="Menu" onAction="#onMenuClick"/>
                     </HBox>
