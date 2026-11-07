@@ -30,8 +30,7 @@
         <Label styleClass="subtitle" wrapText="true"
                text="Fill the grid with numbers from 1 to 6. A number cannot repeat in the same row, column or 2x3 block."/>
 
-        <Button text="Play" onAction="#onPlayClick"
-                styleClass="primary-button" defaultButton="true" prefWidth="200.0"/>
+        <Button text="Play" onAction="#onPlayClick" prefWidth="200.0"/>
         <Button text="Exit" onAction="#onExitClick" prefWidth="200.0"/>
     </VBox>
 </StackPane>
