@@ -43,6 +43,18 @@ public class SudokuValidator implements BoardValidator {
         return true;
     }
 
+
+
+    @Override
+    public int findValidNumber(int row, int column) {
+        for (int number = 1; number <= SudokuBoard.SIZE; number++) {
+            if (isValidMove(row, column, number)) {
+                return number;
+            }
+        }
+        return 0;
+    }
+
     /**
      * Checks that the number is not in another cell of the same row.
      *
