@@ -30,7 +30,21 @@
 
 /* ---------- Buttons ---------- */
 .button {
+    -fx-background-color: #4a2f17;
+    -fx-text-fill: #f5e6c4;
     -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-border-color: #e0a526;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 8;
+    -fx-padding: 8 22;
+    -fx-cursor: hand;
+}
+
+.primary-button {
+    -fx-background-color: #e0a526;
+    -fx-text-fill: #2b1a0e;
 }
 
 /* ---------- Sudoku board ---------- */
